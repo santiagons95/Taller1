@@ -109,16 +109,6 @@ def ingresar_info_cliente():
     lista_clientes.append(cliente_info)
     print(f"\n✔ Cliente registrado exitosamente: {cliente_info}\n")
 
-def agregar_cliente():
-    while True:
-        respuesta = input("¿Desea ingresar la información de un cliente? (si/no): ").strip().lower()
-        if respuesta not in ['si', 'no']:
-            print("Respuesta no válida. Por favor ingrese 'si' o 'no'.")
-            continue
-        if respuesta == 'no':
-            print("No se ingresarán más clientes.\n")
-            break
-        ingresar_info_cliente()
 
 def mostrar_estadisticas():                    
     total_clientes = len(lista_clientes)
@@ -157,11 +147,37 @@ def buscar_cliente():
             print("Cliente no encontrado. Intente nuevamente.\n")
             
 def main():
-    agregar_cliente()
-    if lista_clientes:
-        mostrar_estadisticas()
-        mostrar_clientes_ordenados()
-        buscar_cliente()
+    continuar = True
+    while continuar == True:
+        print(". . .Bienvenido al sistema de gestión de clientes de la clínica dental. . . \n Elija una opción:")
+        print("1. Agregar cliente")
+        print("2. Mostrar estadísticas")
+        print("3. Mostrar clientes ordenados")
+        print("4. Buscar cliente")
+        print("5. Salir")
+        opcion = input("Ingrese su opción: ").strip()
+        if opcion == "1":
+            ingresar_info_cliente()
+        elif opcion == "2":
+            if lista_clientes:
+                mostrar_estadisticas()
+            else:
+                print("No se han registrado clientes aún.\n")
+        elif opcion == "3":
+            if lista_clientes:
+                mostrar_clientes_ordenados()
+            else:
+                print("No se han registrado clientes aún.\n")
+        elif opcion == "4":
+            if lista_clientes:
+                buscar_cliente()
+            else:
+                print("No se han registrado clientes aún.\n")
+        elif opcion == "5":
+            continuar = False
+            print("Saliendo del programa.")
+        else:
+            print("Opción no válida. Por favor ingrese una opción válida.\n")
     else:
         print("No se registraron clientes. No se mostrarán estadísticas ni se realizará búsqueda. Fin del programa.")
 if __name__ == "__main__":
